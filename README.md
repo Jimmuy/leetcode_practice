@@ -54,3 +54,32 @@ A project for arithmetic study , daily update
         return temp;
     }
 ```
+[2.给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。](#2.给定一个数组nums，编写一个函数将所有0移动到数组的末尾，同时保持非零元素的相对顺序。)
+# 2.给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+示例:
+
+输入: [0,1,0,3,12]
+输出: [1,3,12,0,0]
+说明:
+
+必须在原数组上操作，不能拷贝额外的数组。
+尽量减少操作次数。
+
+题解：
+```
+    public void moveZeroes(int[] nums) {
+        //思路 1.使用index记录下当前不为0的数的位置
+        int index = 0;
+        for (Integer num : nums) {
+            if (num != 0) {
+                //将每个不等于0的数字按照顺序往数组中排列，并增加index值
+                nums[index++] = num;
+            }
+        }
+        //最后将index后面的值赋值为0
+        while (nums.length - index > 0) {
+            nums[index++] = 0;
+        }
+    }
+```
