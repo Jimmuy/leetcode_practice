@@ -146,6 +146,7 @@ A project for arithmetic study , daily update
 
 题解：
 ```
+//寻找谷底谷峰[7,1,5,3,6,4],记录最大收益和最小价格，然后依次与当前价格和收益比较
 public int maxProfit(int[] prices) {
         if(prices.length<=0){
                 return 0;
