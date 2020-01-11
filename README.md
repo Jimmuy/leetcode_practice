@@ -11,6 +11,10 @@ A project for arithmetic study , daily update
 
 [4.53. 最大子序和](#4.53.最大子序和)
 
+
+[5.1. 两数之和](#5.1.两数之和)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -194,3 +198,35 @@ public int maxSubArray(int[] nums) {
         return maxSum;
     }
 ```
+# 5.1.两数之和
+
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+
+示例:
+
+给定 nums = [2, 7, 11, 15], target = 9
+
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+
+题解：
+```
+    public int[] twoSum(int[] nums, int target) {
+          //使用hash表存储相应的数据，在一次遍历中根据遍历到的元素去哈希表中去查询是否有target-num[i]对应的值，如果有就是所需要的答案
+        int length = nums.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[]{map.get(target - nums[i]),i};
+            } else {
+                map.put(nums[i],i);
+            }
+        }
+        return null;  
+    }
+```
+
+
+
