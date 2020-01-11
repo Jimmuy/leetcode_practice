@@ -9,6 +9,8 @@ A project for arithmetic study , daily update
 
 [3.121.买卖股票的最佳时机](#4.121.买卖股票的最佳时机)
 
+[4.53. 最大子序和](#4.53.最大子序和)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -143,6 +145,18 @@ A project for arithmetic study , daily update
 输出: 0
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 
+# 53.最大子序和
+
+给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+示例:
+
+输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+进阶:
+
+如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
 
 题解：
 ```
@@ -163,5 +177,21 @@ public int maxProfit(int[] prices) {
             }
         }
         return max;
+    }
+```
+题解：
+```
+```
+public int maxSubArray(int[] nums) {
+        // 思路：贪心算法 设置最大和，和当前最大和，遍历
+        // 最大子序和[-2,1,-3,4,-1,2,1,-5,4]
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            //若当前位置大于前面的和，指针就会移动到当前位置
+            currentSum = Math.max(currentSum + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        return maxSum;
     }
 ```
