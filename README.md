@@ -181,7 +181,6 @@ public int maxProfit(int[] prices) {
 ```
 题解：
 ```
-```
 public int maxSubArray(int[] nums) {
         // 思路：贪心算法 设置最大和，和当前最大和，遍历
         // 最大子序和[-2,1,-3,4,-1,2,1,-5,4]
