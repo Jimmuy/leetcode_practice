@@ -15,6 +15,9 @@ A project for arithmetic study , daily update
 [5.1. 两数之和](#5.1.两数之和)
 
 
+[6.581. 最短无序连续子数组](#6.581. 最短无序连续子数组)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -227,6 +230,49 @@ public int maxSubArray(int[] nums) {
         return null;  
     }
 ```
+# 6.581.最短无序连续子数组
+
+给定一个整数数组，你需要寻找一个连续的子数组，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。
+
+你找到的子数组应是最短的，请输出它的长度。
+
+示例 1:
+
+输入: [2, 6, 4, 8, 10, 9, 15]
+输出: 5
+解释: 你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。
+说明 :
+
+输入的数组长度范围在 [1, 10,000]。
+输入的数组可能包含重复元素 ，所以升序的意思是<=。
 
 
+
+```
+        public static int findUnsortedSubarray(int[] nums) {
+        //本题目查找的就是左边界和右边界的问题，
+        // 最开始的想法是使用两个循环一个正着找左边界，
+        // 一个倒着找右边界，后来发现可以合并为一个循环
+        int length = nums.length;
+        int max = nums[0];
+        int min = nums[length - 1];
+        int right = -1;
+        int left = 0;
+        for (int i = 0; i < length; i++) {
+            //如果右边有比max还大的值，则赋值给max,如果遇到了小于max的值说明顺序要调整
+            if (nums[i] >= max) {
+                max = nums[i];
+            } else {
+                right = i;
+            }
+            //同理找最小值和左边界
+            if (nums[length - i - 1] <= min) {
+                min = nums[length - i - 1];
+            } else {
+                left = length - i - 1;
+            }
+        }
+        return right - left + 1;
+    }
+```
 
