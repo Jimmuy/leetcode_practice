@@ -15,8 +15,9 @@ A project for arithmetic study , daily update
 [5.1. 两数之和](#5.1.两数之和)
 
 
-[6.581. 最短无序连续子数组](#6.581. 最短无序连续子数组)
+[6.581. 最短无序连续子数组](#6.581.最短无序连续子数组)
 
+[8.78.子集](#8.78.子集)
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -247,6 +248,9 @@ public int maxSubArray(int[] nums) {
 输入的数组可能包含重复元素 ，所以升序的意思是<=。
 
 
+# 8.78.子集
+
+给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
 
 ```
         public static int findUnsortedSubarray(int[] nums) {
@@ -276,3 +280,36 @@ public int maxSubArray(int[] nums) {
     }
 ```
 
+```
+ public List<List<Integer>> subsets(int[] nums) {
+        //思路 使用while循环控制当前添加进数组的长度 内循环for用来向数组中添加值
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<Integer>());
+        for (Integer n : nums) {
+            //内循环的循环次数，因为要从result取值，所以最大角标就是result的当前size
+            int size = result.size();
+            for (int i = 0; i < size; i++) {
+                //每次从result数组中添加轮训的值
+                List<Integer> list = new ArrayList<>(result.get(i));
+                list.add(n);
+                result.add(list);
+            }
+        }
+        return result;
+    }
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        //二进制做法
+        //一共1<<nums.length个数
+        for (int i = 0; i <( 1 << nums.length); i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 0; j < nums.length; j++) {
+                //每次循环先找(i >> j) & 1为1的值若为1则添加进来
+                if (((i >> j) & 1) == 1) list.add(j);
+            }
+            result.add(list);
+        }
+        return result;
+    }
+```
