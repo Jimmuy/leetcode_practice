@@ -15,6 +15,16 @@ A project for arithmetic study , daily update
 [5.1. 两数之和](#5.1.两数之和)
 
 
+[6.581. 最短无序连续子数组](#6.581.最短无序连续子数组)
+
+[7.78.子集](#7.78.子集)
+
+[8.39.组合总和I](#8.39.组合总和)
+
+[9.40.组合总和II](#9.40.组合总和II)
+
+[10.90.子集II](#10.90.子集II)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -227,6 +237,224 @@ public int maxSubArray(int[] nums) {
         return null;  
     }
 ```
+# 6.581.最短无序连续子数组
+
+给定一个整数数组，你需要寻找一个连续的子数组，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。
+
+你找到的子数组应是最短的，请输出它的长度。
+
+示例 1:
+
+输入: [2, 6, 4, 8, 10, 9, 15]
+输出: 5
+解释: 你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。
+说明 :
+
+输入的数组长度范围在 [1, 10,000]。
+输入的数组可能包含重复元素 ，所以升序的意思是<=。
 
 
+# 7.78.子集
 
+给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+
+```
+        public static int findUnsortedSubarray(int[] nums) {
+        //本题目查找的就是左边界和右边界的问题，
+        // 最开始的想法是使用两个循环一个正着找左边界，
+        // 一个倒着找右边界，后来发现可以合并为一个循环
+        int length = nums.length;
+        int max = nums[0];
+        int min = nums[length - 1];
+        int right = -1;
+        int left = 0;
+        for (int i = 0; i < length; i++) {
+            //如果右边有比max还大的值，则赋值给max,如果遇到了小于max的值说明顺序要调整
+            if (nums[i] >= max) {
+                max = nums[i];
+            } else {
+                right = i;
+            }
+            //同理找最小值和左边界
+            if (nums[length - i - 1] <= min) {
+                min = nums[length - i - 1];
+            } else {
+                left = length - i - 1;
+            }
+        }
+        return right - left + 1;
+    }
+```
+
+```
+ public List<List<Integer>> subsets(int[] nums) {
+        //思路 使用while循环控制当前添加进数组的长度 内循环for用来向数组中添加值
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<Integer>());
+        for (Integer n : nums) {
+            //内循环的循环次数，因为要从result取值，所以最大角标就是result的当前size
+            int size = result.size();
+            for (int i = 0; i < size; i++) {
+                //每次从result数组中添加轮训的值
+                List<Integer> list = new ArrayList<>(result.get(i));
+                list.add(n);
+                result.add(list);
+            }
+        }
+        return result;
+    }
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        //二进制做法
+        //一共1<<nums.length个数
+        for (int i = 0; i <( 1 << nums.length); i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 0; j < nums.length; j++) {
+                //每次循环先找(i >> j) & 1为1的值若为1则添加进来
+                if (((i >> j) & 1) == 1) list.add(j);
+            }
+            result.add(list);
+        }
+        return result;
+    }
+```
+# 8.39.组合总和 
+
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+
+candidates 中的数字可以无限制重复被选取。
+
+说明：
+
+所有数字（包括 target）都是正整数。
+解集不能包含重复的组合。 
+示例 1:
+
+输入: candidates = [2,3,6,7], target = 7,
+所求解集为:
+[
+  [7],
+  [2,2,3]
+]
+示例 2:
+
+输入: candidates = [2,3,5], target = 8,
+所求解集为:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+
+
+题解：
+（39和40）题为类似问题，采用回溯算法的方式进行求解，解答的过程中采用画图的方式找到解答题目的思路，两道题目中唯一的不同点是一个可以使用重复的元素而一个不可以使用，这就使得这道题目的解题思路一致。
+
+```
+ List<List<Integer>> result;
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        //边界条件判断
+        if (candidates == null || candidates.length <= 0) {
+            return result;
+        }
+        Arrays.sort(candidates);
+        List<Integer> list = new ArrayList<>();
+        helper(candidates, list, 0, target);
+        return result;
+    }
+
+    public void helper(int[] cadidaes, List<Integer> list, int index, int target) {
+        if (target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < cadidaes.length && target >= cadidaes[i]; i++) {
+            list.add(cadidaes[i]);
+            //遍历过程中采用重复的元素
+            helper(cadidaes, list, i, target - cadidaes[i]);
+            list.remove(list.size()-1);
+        }
+
+    }
+```
+
+# 9.40.组合总和II
+给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+
+candidates 中的每个数字在每个组合中只能使用一次。
+
+说明：
+
+所有数字（包括目标数）都是正整数。
+解集不能包含重复的组合。 
+示例 1:
+
+输入: candidates = [10,1,2,7,6,1,5], target = 8,
+所求解集为:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]
+示例 2:
+
+输入: candidates = [2,5,2,1,2], target = 5,
+所求解集为:
+[
+  [1,2,2],
+  [5]
+]
+```
+List<List<Integer>> result;
+       public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        result = new ArrayList<>();
+        if (candidates == null || candidates.length <= 0) {
+            return result;
+        }
+        Arrays.sort(candidates);
+        helper2(candidates, new ArrayList<Integer>(), 0, target);
+        return result;
+    }
+
+    public void helper2(int[] cadidaes, List<Integer> list, int index, int target) {
+        if (target == 0) {
+            if (!result.contains(list)) {
+                result.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        for (int i = index; i < cadidaes.length && target >= cadidaes[i]; i++) {
+            list.add(cadidaes[i]);
+            //遍历过程中不采用重复的元素，将index移动到下个元素
+            helper2(cadidaes, list, ++index, target - cadidaes[i]);
+            list.remove(list.size() - 1);
+        }
+
+    }
+```
+
+# 10.90.子集II
+
+给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+
+说明：解集不能包含重复的子集。
+
+示例:
+
+输入: [1,2,2]
+输出:
+[
+  [2],
+  [1],
+  [1,2,2],
+  [2,2],
+  [1,2],
+  []
+]
+```
+
+```
