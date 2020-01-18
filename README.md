@@ -25,6 +25,8 @@ A project for arithmetic study , daily update
 
 [10.90.子集II](#10.90.子集II)
 
+[11.46.全排列](#10.46.全排列)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -481,4 +483,52 @@ public List<List<Integer>> subsetsWithDup(int[] num) {
     return result;
 }
 
+```
+
+# 46.全排列
+
+
+给定一个没有重复数字的序列，返回其所有可能的全排列。
+
+示例:
+
+输入: [1,2,3]
+输出:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+
+```
+    public  void backtrack(int[] nums, int length, List<Integer> list, List<List<Integer>> output, int depth, boolean[] used) {
+        if (depth == length) {
+            //当深度和长度一样的时候则，就是答案
+            output.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < length; i++) {
+            if (!used[i]) {
+                //如果当前没有用过，则进入下一层
+                list.add(nums[i]);
+                used[i] = true;
+                backtrack(nums, length, list, output, depth + 1, used);
+                //回溯
+                used[i] = false;
+                list.remove(depth);
+            }
+        }
+    }
+
+    public  List<List<Integer>> permute(int[] nums) {
+        int length = nums.length;
+        List<List<Integer>> output = new LinkedList<>();
+        ArrayList<Integer> nums_lst = new ArrayList<>();
+        boolean[] used = new boolean[length];
+        backtrack(nums, length, nums_lst, output, 0, used);
+        return output;
+    }
 ```
