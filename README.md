@@ -27,6 +27,8 @@ A project for arithmetic study , daily update
 
 [11.46.全排列](#10.46.全排列)
 
+[12.47.全排列II](#12.47.全排列II)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -485,7 +487,7 @@ public List<List<Integer>> subsetsWithDup(int[] num) {
 
 ```
 
-# 46.全排列
+# 11.46.全排列
 
 
 给定一个没有重复数字的序列，返回其所有可能的全排列。
@@ -530,5 +532,50 @@ public List<List<Integer>> subsetsWithDup(int[] num) {
         boolean[] used = new boolean[length];
         backtrack(nums, length, nums_lst, output, 0, used);
         return output;
+    }
+```
+# 12.47.全排列II
+
+给定一个可包含重复数字的序列，返回所有不重复的全排列。
+
+示例:
+
+输入: [1,1,2]
+输出:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+]
+
+```
+  public static List<List<Integer>> permuteUnique(int[] nums) {
+        //先排列出所有的可能,和上一题相比较只是多了一步去重工作
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        //是否使用过当前节点深度
+        int length = nums.length;
+        boolean[] isUsed = new boolean[length];
+        helper(nums, length, result, list, isUsed, 0);
+        return result;
+    }
+
+    private static void helper(int[] nums, int length, List<List<Integer>> result, List<Integer> list, boolean[] isUsed, int depth) {
+        ArrayList<Integer> element = new ArrayList<>(list);
+        //去重元素
+        if (length == depth && !result.contains(element)) {
+            result.add(element);
+            return;
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!isUsed[i]) {
+                list.add(nums[i]);
+                isUsed[i] = true;
+                helper(nums, length, result, list, isUsed, depth + 1);
+                isUsed[i] = false;
+                list.remove(depth);
+            }
+        }
     }
 ```
