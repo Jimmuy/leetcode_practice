@@ -43,6 +43,9 @@ A project for arithmetic study , daily update
 
 [19.1221.分割平衡字符串](#19.1221.分割平衡字符串)
 
+[20.226. 翻转二叉树](#20.226.翻转二叉树)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -913,4 +916,50 @@ s[i] = 'L' 或 'R'
         }
         return result;
     }
+```
+
+
+# 20.226.翻转二叉树
+
+翻转一棵二叉树。
+
+示例：
+
+输入：
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+输出：
+
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/invert-binary-tree
+
+```
+    //思路：从根节点向下一次交换左右节点就可以翻转这棵树
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return null;
+        }
+        //交换节点
+        TreeNode temp;
+        temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        if (root.left != null) {
+            invertTree(root.left);
+        }
+        if (root.right != null) {
+            invertTree(root.right);
+        }
+        return root;
+        }
 ```
