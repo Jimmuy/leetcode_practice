@@ -45,6 +45,7 @@ A project for arithmetic study , daily update
 
 [20.226. 翻转二叉树](#20.226.翻转二叉树)
 
+[21.938.二叉搜索树的范围和](#21.938.二叉搜索树的范围和)
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -962,4 +963,49 @@ s[i] = 'L' 或 'R'
         }
         return root;
         }
+```
+# 21.938.二叉搜索树的范围和
+
+给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。
+
+二叉搜索树保证具有唯一的值。
+
+ 
+
+示例 1：
+
+输入：root = [10,5,15,3,7,null,18], L = 7, R = 15
+输出：32
+示例 2：
+
+输入：root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
+输出：23
+ 
+
+提示：
+
+树中的结点数量最多为 10000 个。
+最终的答案保证小于 2^31。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/range-sum-of-bst
+
+```
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        if (root == null) {
+            return 0;
+        }
+        int result = 0;
+        if (root.val >= L && root.val <= R) {
+            //累加结果并向下查找合适的值
+            result = root.val + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R);
+        } else if (root.val < L) {
+            //往子树的右边查找
+            return rangeSumBST(root.right,L,R);
+        }else {
+            //往子树的左边查找
+            return rangeSumBST(root.left,L,R);
+        }
+        return result;        
+    }
 ```
