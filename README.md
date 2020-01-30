@@ -47,6 +47,8 @@ A project for arithmetic study , daily update
 
 [21.938.二叉搜索树的范围和](#21.938.二叉搜索树的范围和)
 
+[22.1304.和为零的N个唯一整数](#22.1304.和为零的N个唯一整数)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -1007,5 +1009,53 @@ s[i] = 'L' 或 'R'
             return rangeSumBST(root.left,L,R);
         }
         return result;        
+    }
+```
+
+
+
+# 22.1304.和为零的N个唯一整数
+
+给你一个整数 n，请你返回 任意 一个由 n 个 各不相同 的整数组成的数组，并且这 n 个数相加和为 0 。
+
+
+示例 1：
+
+输入：n = 5
+输出：[-7,-1,1,3,4]
+解释：这些数组也是正确的 [-5,-1,1,2,3]，[-3,-1,2,-2,4]。
+示例 2：
+
+输入：n = 3
+输出：[-1,0,1]
+示例 3：
+
+输入：n = 1
+输出：[0]
+ 
+
+提示：
+
+1 <= n <= 1000
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/find-n-unique-integers-sum-up-to-zero
+
+```
+    public int[] sumZero(int n) {
+        //思路 在循环中一直添加相反数，如果是奇数个的话就将最后一个赋值为0
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                result[i] = i + 1;
+            } else {
+                result[i] = -i;
+
+            }
+        }
+        if (n % 2 != 0) {
+            result[n - 1] = 0;
+        }
+        return result;
     }
 ```
