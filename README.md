@@ -49,6 +49,8 @@ A project for arithmetic study , daily update
 
 [22.1304.和为零的N个唯一整数](#22.1304.和为零的N个唯一整数)
 
+[23.728.自除数](#23.728.自除数)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -1059,5 +1061,45 @@ s[i] = 'L' 或 'R'
         return result;
     }
 
-    
+
+```
+
+# 23.728.自除数
+
+自除数 是指可以被它包含的每一位数除尽的数。
+
+例如，128 是一个自除数，因为 128 % 1 == 0，128 % 2 == 0，128 % 8 == 0。
+
+还有，自除数不允许包含 0 。
+
+给定上边界和下边界数字，输出一个列表，列表的元素是边界（含边界）内所有的自除数。
+
+示例 1：
+
+输入： 
+上边界left = 1, 下边界right = 22
+输出： [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
+注意：
+
+每个输入参数的边界满足 1 <= left <= right <= 10000。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/self-dividing-numbers
+
+```
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> ans = new ArrayList();
+        for (int n = left; n <= right; ++n) {
+            if (selfDividing(n)) ans.add(n);
+        }
+        return ans;
+    }
+    public boolean selfDividing(int n) {
+        for (char c: String.valueOf(n).toCharArray()) {
+            if (c == '0' || (n % (c - '0') > 0))
+                return false;
+        }
+        return true;
+    }
+
 ```
