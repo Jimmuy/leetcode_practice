@@ -57,6 +57,8 @@ A project for arithmetic study , daily update
 
 [26.476.数字的补数](#26.476.数字的补数)
 
+[27.942. 增减字符串匹配](#27.942. 增减字符串匹配)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -1258,5 +1260,59 @@ s[i] = 'L' 或 'R'
         }
         temp2 -= 1;
         return num ^ temp2;
+    }
+```
+
+# 27.942. 增减字符串匹配
+
+给定只含 "I"（增大）或 "D"（减小）的字符串 S ，令 N = S.length。
+
+返回 [0, 1, ..., N] 的任意排列 A 使得对于所有 i = 0, ..., N-1，都有：
+
+如果 S[i] == "I"，那么 A[i] < A[i+1]
+如果 S[i] == "D"，那么 A[i] > A[i+1]
+ 
+
+示例 1：
+
+输出："IDID"
+输出：[0,4,1,3,2]
+示例 2：
+
+输出："III"
+输出：[0,1,2,3]
+示例 3：
+
+输出："DDI"
+输出：[3,2,0,1]
+ 
+
+提示：
+
+1 <= S.length <= 1000
+S 只包含字符 "I" 或 "D"。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/di-string-match
+
+
+```
+//思路： 通过观察可以确定的是最大值可以设置为string的长度，最小值为0
+遇到'I'就增长一个，遇到'D'就减小一个就可以得到所需要的数组
+
+    public int[] diStringMatch(String s) {
+        int length = s.length();
+        int max = length;
+        int min = 0;
+        int[] result = new int[length + 1];
+        for (int i = 0; i < length; i++) {
+            if (s.charAt(i) == 'I') {
+                result[i] = min++;
+            } else {
+                result[i] = max--;
+            }
+        }
+        result[length] = min;
+        return result;
     }
 ```
