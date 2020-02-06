@@ -57,7 +57,9 @@ A project for arithmetic study , daily update
 
 [26.476.数字的补数](#26.476.数字的补数)
 
-[27.942. 增减字符串匹配](#27.942. 增减字符串匹配)
+[27.942.增减字符串匹配](#27.942.增减字符串匹配)
+
+[28.206.反转链表](#28.206.反转链表)
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -1315,4 +1317,35 @@ S 只包含字符 "I" 或 "D"。
         result[length] = min;
         return result;
     }
+```
+
+# 28.206.反转链表
+
+反转一个单链表。
+
+示例:
+
+输入: 1->2->3->4->5->NULL
+输出: 5->4->3->2->1->NULL
+进阶:
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/reverse-linked-list
+```
+        //定义翻转链表的头结点
+        ListNode pre = null;
+        ListNode current = head;
+        //定义临时结点
+        ListNode temp = current.next;
+        while (current != null) {
+            //让当前节点指向上一个节点
+            current.next = pre;
+            //pre 节点往前走一个节点
+            pre = current;
+            //current节点也往前走一个节点
+            current = temp;
+        }
+        //返回翻转后的链表的头结点
+        return pre;
 ```
