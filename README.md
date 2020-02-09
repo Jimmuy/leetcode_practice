@@ -65,6 +65,9 @@ A project for arithmetic study , daily update
 
 [30.349.两个数组的交集](#30.349.两个数组的交集)
 
+[31.961.重复N次的元素](#31.961.重复N次的元素)
+
+
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -1441,5 +1444,47 @@ cache.get(4);       // 返回  4
     for (int s : set1) output[idx++] = s;
     return output;
 
+    }
+```
+# 31.961.重复N次的元素
+
+在大小为 2N 的数组 A 中有 N+1 个不同的元素，其中有一个元素重复了 N 次。
+
+返回重复了 N 次的那个元素。
+
+ 
+
+示例 1：
+
+输入：[1,2,3,3]
+输出：3
+示例 2：
+
+输入：[2,1,2,5,3,2]
+输出：2
+示例 3：
+
+输入：[5,1,5,2,5,3,5,4]
+输出：5
+ 
+
+提示：
+
+4 <= A.length <= 10000
+0 <= A[i] < 10000
+A.length 为偶数
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/n-repeated-element-in-size-2n-array
+
+```
+    //思路比较简单，如果是数组中一半的元素都是相同的数字，那么无论怎么排列都会有一组连续三个数字其中有两个是相同的，如果没有就是最后两个
+    public int repeatedNTimes(int[] A) {
+        for (int i = 0; i < A.length - 2; i++) {
+            if (A[i] == A[i + 1] || A[i] == A[i + 2]) {
+                return A[i];
+            }
+        }
+        return A[A.length - 1];
     }
 ```
