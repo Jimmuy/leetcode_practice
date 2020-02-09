@@ -67,6 +67,8 @@ A project for arithmetic study , daily update
 
 [31.961.重复N次的元素](#31.961.重复N次的元素)
 
+[32.977.有序数组的平方](#32.977.有序数组的平方)
+
 
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
@@ -1486,5 +1488,48 @@ A.length 为偶数
             }
         }
         return A[A.length - 1];
+    }
+```
+# 32.977.有序数组的平方
+
+给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。
+
+ 
+
+示例 1：
+
+输入：[-4,-1,0,3,10]
+输出：[0,1,9,16,100]
+示例 2：
+
+输入：[-7,-3,2,3,11]
+输出：[4,9,9,49,121]
+ 
+
+提示：
+
+1 <= A.length <= 10000
+-10000 <= A[i] <= 10000
+A 已按非递减顺序排序。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/squares-of-a-sorted-array
+
+```
+        public static int[] sortedSquares(int[] nums) {
+        //双指针法，声明首位两个指针，然后判断平方的大小再插入新的数组中
+        int start = 0;
+        int length = nums.length;
+        int end = length - 1;
+        int[] result = new int[length];
+        for (int i = 0; i < length ; i++) {
+                if (nums[start] * nums[start] > nums[end] * nums[end]) {
+                    result[length - i - 1] = nums[start] * nums[start++];
+                } else  {
+                    result[length - i - 1] = nums[end] * nums[end--];
+                }
+
+        }
+        return result;
     }
 ```
