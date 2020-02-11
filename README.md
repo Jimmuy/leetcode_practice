@@ -72,6 +72,9 @@ A project for arithmetic study , daily update
 
 [33.509.斐波那契数](#33.509.斐波那契数)
 
+[34.160.相交链表](#34.160.相交链表)
+
+
 
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
@@ -1579,5 +1582,74 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
         } else {
             return fib(num - 1) + fib(num - 2);
         }
+    }
+```
+
+# 34.160.相交链表
+编写一个程序，找到两个单链表相交的起始节点。
+
+如下面的两个链表：
+
+
+
+在节点 c1 开始相交。
+
+ 
+
+示例 1：
+
+
+
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+输出：Reference of the node with value = 8
+输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+ 
+
+示例 2：
+
+
+
+输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+输出：Reference of the node with value = 2
+输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+ 
+
+示例 3：
+
+
+
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+输出：null
+输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+解释：这两个链表不相交，因此返回 null。
+ 
+
+注意：
+
+如果两个链表没有交点，返回 null.
+在返回结果后，两个链表仍须保持原有的结构。
+可假定整个链表结构中没有循环。
+程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+
+来源：力扣（LeetCode）/题目中有图片可以参考链接
+链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists
+
+```
+/**
+     * 1-2-3-4-5-6-7
+     *     |
+     *     8
+     * 如上两个相交的链表，如果相交那么分辨用两个指针，当指针1从A的头开始走，走到尾的时候接上B的头继续走，如果相交则指针也会相交
+     * 有点像赛跑，两人路程一样，速度一样，如果有焦点，那么必定有一段路程是一起走的
+     * */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode p1 = headA;
+        ListNode p2 = headB;
+        while (p1 != p2) {
+            p1 = p1==null?p2:p1.next;
+            p2 = p2==null?p1:p2.next;
+        }
+
+        return p1;
     }
 ```
