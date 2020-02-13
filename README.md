@@ -76,7 +76,9 @@ A project for arithmetic study , daily update
 
 [35.21.合并两个有序链表](#35.21.合并两个有序链表)
 
+[36.22.链表中倒数第k个节点](#36.22.链表中倒数第k个节点)
 
+[37.70.爬楼梯](#37.70.爬楼梯)
 
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
@@ -1721,5 +1723,66 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
             head = head.next;
         }
         return result;        
+    }
+```
+# 37.70.爬楼梯
+假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+注意：给定 n 是一个正整数。
+
+示例 1：
+
+输入： 2
+输出： 2
+解释： 有两种方法可以爬到楼顶。
+1.  1 阶 + 1 阶
+2.  2 阶
+示例 2：
+
+输入： 3
+输出： 3
+解释： 有三种方法可以爬到楼顶。
+1.  1 阶 + 1 阶 + 1 阶
+2.  1 阶 + 2 阶
+3.  2 阶 + 1 阶
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/climbing-stairs
+
+```
+//思路：此题使用递归会超时，故采用动态规划，使用数组存储每一级台阶的可能性
+//爬楼梯 到达第n层，可以分解为到达第n-1层和到达第n-2层之和也就是
+// p(n) = p(n-1)+p(n-2)，因为楼梯的走法有走一步和走两步这种。
+
+    public int climbStairs(int n) {
+        //递归
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+
+    public int climbStairs(int n) {
+        //动态规划
+       if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 ```
