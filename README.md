@@ -1687,3 +1687,39 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
            
     }
 ```
+# 36.22.链表中倒数第k个节点
+输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。
+
+ 
+
+示例：
+
+给定一个链表: 1->2->3->4->5, 和 k = 2.
+
+返回链表 4->5.
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof
+
+```
+//思路：比较蠢想了两个，一个是先测量出来链表长度，返回长度-k的那段链表，另一个是翻转链表然后正着数k个然后再翻转回来
+其实最简单的是双指针算法，指定两个指针，让其中一个先走K步，直到为null的这段就是结果
+虽然蠢但是也通过了时间复杂度O(N)
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode temp = head;
+        ListNode result = null;
+        int index = 1;
+        while (temp.next != null) {
+            temp = temp.next;
+            index++;
+        }
+        if(index == k){
+            return head;
+        }
+        for (int i = 0; i < index - k; i++) {
+            result = head.next;
+            head = head.next;
+        }
+        return result;        
+    }
+```
