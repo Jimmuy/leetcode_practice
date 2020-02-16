@@ -80,6 +80,8 @@ A project for arithmetic study , daily update
 
 [37.70.爬楼梯](#37.70.爬楼梯)
 
+[38.面试题01.01.判定字符是否唯一](#38.面试题01.01.判定字符是否唯一)
+
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -1784,5 +1786,35 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
             dp[i] = dp[i - 1] + dp[i - 2];
         }
         return dp[n];
+    }
+```
+# 38.面试题01.01.判定字符是否唯一
+实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
+
+示例 1：
+
+输入: s = "leetcode"
+输出: false 
+示例 2：
+
+输入: s = "abc"
+输出: true
+限制：
+
+0 <= len(s) <= 100
+如果你不使用额外的数据结构，会很加分。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/is-unique-lcci
+
+```
+    public boolean isUnique(String str) {
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (str.indexOf(String.valueOf(chars[i])) != str.lastIndexOf(String.valueOf(chars[i]))){
+                return false;
+            }
+        }
+        return true;        
     }
 ```
