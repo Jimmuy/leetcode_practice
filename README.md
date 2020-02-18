@@ -1839,7 +1839,7 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 
 ```
 //思路:转成数组后排序然后再对比字符串，相等则为true
-
+//也可以转成数组，循环来判断是否相等
     public boolean CheckPermutation(String s1, String s2) {
         char[] chars1 = s1.toCharArray();
         char[] chars2 = s2.toCharArray();
