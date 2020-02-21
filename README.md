@@ -83,6 +83,8 @@ A project for arithmetic study , daily update
 
 [40.1122.数组的相对排序](#40.1122.数组的相对排序)
 
+[41.575.分糖果](#41.575.分糖果)
+
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -1903,4 +1905,41 @@ arr2 中的每个元素 arr2[i] 都出现在 arr1 中
         }
         return ref;
 }    
+```
+
+# 41.575.分糖果
+
+给定一个偶数长度的数组，其中不同的数字代表着不同种类的糖果，每一个数字代表一个糖果。你需要把这些糖果平均分给一个弟弟和一个妹妹。返回妹妹可以获得的最大糖果的种类数。
+
+示例 1:
+
+输入: candies = [1,1,2,2,3,3]
+输出: 3
+解析: 一共有三种种类的糖果，每一种都有两个。
+     最优分配方案：妹妹获得[1,2,3],弟弟也获得[1,2,3]。这样使妹妹获得糖果的种类数最多。
+示例 2 :
+
+输入: candies = [1,1,2,3]
+输出: 2
+解析: 妹妹获得糖果[2,3],弟弟获得糖果[1,1]，妹妹有两种不同的糖果，弟弟只有一种。这样使得妹妹可以获得的糖果种类数最多。
+注意:
+
+数组的长度为[2, 10,000]，并且确定为偶数。
+数组中数字的大小在范围[-100,000, 100,000]内。
+
+```
+//思路：排序后查找不一样的数
+    public int distributeCandies(int[] candies) {
+        Arrays.sort(candies);
+        int count = 1;
+        for (int i = 1; i < candies.length && count < candies.length / 2; i++)
+            if (candies[i] > candies[i - 1])
+                count++;
+        return count;
+    }
+
+作者：LeetCode
+链接：https://leetcode-cn.com/problems/distribute-candies/solution/fen-tang-guo-by-leetcode/
+来源：力扣（LeetCode）
+
 ```
