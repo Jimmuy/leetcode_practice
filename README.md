@@ -85,6 +85,9 @@ A project for arithmetic study , daily update
 
 [41.575.分糖果](#41.575.分糖果)
 
+[42.面试题57.和为s的两个数字](#42.面试题57.和为s的两个数字)
+
+
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -1940,6 +1943,50 @@ arr2 中的每个元素 arr2[i] 都出现在 arr1 中
 
 作者：LeetCode
 链接：https://leetcode-cn.com/problems/distribute-candies/solution/fen-tang-guo-by-leetcode/
+来源：力扣（LeetCode）
+
+```
+# 42.面试题57.和为s的两个数字
+
+输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
+
+ 
+
+示例 1：
+
+输入：nums = [2,7,11,15], target = 9
+输出：[2,7] 或者 [7,2]
+示例 2：
+
+输入：nums = [10,26,30,31,47,60], target = 40
+输出：[10,30] 或者 [30,10]
+ 
+
+限制：
+
+1 <= nums.length <= 10^5
+1 <= nums[i] <= 10^6
+```
+
+    public int[] twoSum(int[] nums, int target) {
+        int left=0,right=nums.length-1;
+        int [] res=new int[2];
+        while(left<right){
+            if (nums[left]+nums[right]==target){
+                res[0]=nums[left];
+                res[1]=nums[right];
+                return res;
+            }
+            else if (nums[left]+nums[right]<target)
+                left++;
+            else
+                right--;
+        }
+        return res;
+    }
+
+作者：wei-yu-13
+链接：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/solution/2msshuang-100-by-wei-yu-13/
 来源：力扣（LeetCode）
 
 ```
