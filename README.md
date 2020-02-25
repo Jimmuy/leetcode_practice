@@ -87,6 +87,9 @@ A project for arithmetic study , daily update
 
 [42.面试题57.和为s的两个数字](#42.面试题57.和为s的两个数字)
 
+[43.230.二叉搜索树中第K小的元素](#43.230.二叉搜索树中第K小的元素)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -1987,4 +1990,49 @@ arr2 中的每个元素 arr2[i] 都出现在 arr1 中
 链接：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/solution/2msshuang-100-by-wei-yu-13/
 来源：力扣（LeetCode）
 
+```
+# 43.230.二叉搜索树中第K小的元素
+给定一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
+
+说明：
+你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
+
+示例 1:
+
+输入: root = [3,1,4,null,2], k = 1
+   3
+  / \
+ 1   4
+  \
+   2
+输出: 1
+示例 2:
+
+输入: root = [5,3,6,2,4,null,null,1], k = 3
+       5
+      / \
+     3   6
+    / \
+   2   4
+  /
+ 1
+输出: 3
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst
+
+```
+//思路，先进行中序遍历，得到排序好的数组，然后第k-1个就是所找的答案
+    public int kthSmallest(TreeNode root, int k) {
+        List<Integer> result = inOrder(root,new ArrayList<Integer>());
+        return result.get(k-1);
+    }
+
+    public ArrayList<Integer> inOrder(TreeNode node, ArrayList<Integer> arrs) {
+        if (node == null) return arrs;
+        inOrder(node.left, arrs);
+        arrs.add(node.val);
+        inOrder(node.right, arrs);
+        return arrs;
+    }
 ```
