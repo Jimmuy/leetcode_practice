@@ -89,6 +89,7 @@ A project for arithmetic study , daily update
 
 [43.230.二叉搜索树中第K小的元素](#43.230.二叉搜索树中第K小的元素)
 
+[44.LCP1.猜数字](#44.LCP1.猜数字)
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -2034,5 +2035,50 @@ arr2 中的每个元素 arr2[i] 都出现在 arr1 中
         arrs.add(node.val);
         inOrder(node.right, arrs);
         return arrs;
+    }
+```
+
+# 44.LCP1.猜数字
+小A 和 小B 在玩猜数字。小B 每次从 1, 2, 3 中随机选择一个，小A 每次也从 1, 2, 3 中选择一个猜。他们一共进行三次这个游戏，请返回 小A 猜对了几次？
+
+ 
+
+输入的guess数组为 小A 每次的猜测，answer数组为 小B 每次的选择。guess和answer的长度都等于3。
+
+ 
+
+示例 1：
+
+输入：guess = [1,2,3], answer = [1,2,3]
+输出：3
+解释：小A 每次都猜对了。
+ 
+
+示例 2：
+
+输入：guess = [2,2,3], answer = [3,2,1]
+输出：1
+解释：小A 只猜对了第二次。
+ 
+
+限制：
+
+guess的长度 = 3
+answer的长度 = 3
+guess的元素取值为 {1, 2, 3} 之一。
+answer的元素取值为 {1, 2, 3} 之一。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/guess-numbers
+
+```
+//两个相同的数字亦或后等于0
+    public int game(int[] guess, int[] answer) {
+        if (guess == null) return 0;
+        int result = 0;
+        for (int i = 0; i < guess.length; i++) {
+            if ((guess[i] ^ answer[i]) == 0) result++;
+        }
+        return result;
     }
 ```
