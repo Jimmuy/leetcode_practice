@@ -91,6 +91,8 @@ A project for arithmetic study , daily update
 
 [44.LCP1.猜数字](#44.LCP1.猜数字)
 
+[45.移动零](#45.移动零)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2080,5 +2082,32 @@ answer的元素取值为 {1, 2, 3} 之一。
             if ((guess[i] ^ answer[i]) == 0) result++;
         }
         return result;
+    }
+```
+# 45.移动零
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+示例:
+
+输入: [0,1,0,3,12]
+输出: [1,3,12,0,0]
+说明:
+
+必须在原数组上操作，不能拷贝额外的数组。
+尽量减少操作次数。
+
+```
+    public void moveZeroes(int[] nums) {
+        int index = 0;
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            if (nums[i] != 0) {
+                nums[index++] = nums[i];
+            }
+        }
+
+        for (int i = 0; i < length - index; i++) {
+            nums[length - i - 1] = 0;
+        }
     }
 ```
