@@ -2137,7 +2137,7 @@ answer的元素取值为 {1, 2, 3} 之一。
 链接：https://leetcode-cn.com/problems/reverse-string
 
 ```
-//思路：类似于双指针法，将首位的两个字段相互调换
+//思路1：类似于双指针法，将首位的两个字段相互调换
     public void reverseString(char[] s) {
         int length = s.length;
         for (int i = 0; i < length / 2; i++) {
@@ -2146,5 +2146,21 @@ answer的元素取值为 {1, 2, 3} 之一。
             s[i] = s[length - i - 1];
             s[length - i - 1] = temp;
         }
+    }
+
+//思路2：使用递归从两头开始交换，交换完成后将指针进行加减，再次调用自己
+
+   public void reverseString(char[] s) {
+        helper(s, 0, s.length - 1);
+    }
+
+    private void helper(char[] s, int left, int right) {
+        if (left >= right) return;
+        char temp = s[left];
+        s[left++] = s[right];
+        s[right--] = temp;
+        helper(s, left, right);
+
+
     }
 ```
