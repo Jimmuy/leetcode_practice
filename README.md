@@ -2149,7 +2149,6 @@ answer的元素取值为 {1, 2, 3} 之一。
     }
 
 //思路2：使用递归从两头开始交换，交换完成后将指针进行加减，再次调用自己
-
    public void reverseString(char[] s) {
         helper(s, 0, s.length - 1);
     }
