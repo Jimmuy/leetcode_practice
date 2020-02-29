@@ -93,6 +93,8 @@ A project for arithmetic study , daily update
 
 [45.移动零](#45.移动零)
 
+[46.344.反转字符串](#46.344.反转字符串)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2108,6 +2110,41 @@ answer的元素取值为 {1, 2, 3} 之一。
 
         for (int i = 0; i < length - index; i++) {
             nums[length - i - 1] = 0;
+        }
+    }
+```
+
+# 46.344.反转字符串
+
+编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
+
+ 
+
+示例 1：
+
+输入：["h","e","l","l","o"]
+输出：["o","l","l","e","h"]
+示例 2：
+
+输入：["H","a","n","n","a","h"]
+输出：["h","a","n","n","a","H"]
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/reverse-string
+
+```
+//思路：类似于双指针法，将首位的两个字段相互调换
+    public void reverseString(char[] s) {
+        int length = s.length;
+        for (int i = 0; i < length / 2; i++) {
+            char temp;
+            temp = s[i];
+            s[i] = s[length - i - 1];
+            s[length - i - 1] = temp;
         }
     }
 ```
