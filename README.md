@@ -99,6 +99,9 @@ A project for arithmetic study , daily update
 
 [48.面试题10.01.合并排序的数组](#48.面试题10.01.合并排序的数组)
 
+[49.面试题58 - II. 左旋转字符串](#49.面试题58-II.左旋转字符串)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2217,7 +2220,39 @@ answer的元素取值为 {1, 2, 3} 之一。
      return res;
  }
 ```
-# 48.面试题10.01.合并排序的数组
+
+
+# 48.面试题58-II.左旋转字符串
+
+字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+
+ 
+
+示例 1：
+
+输入: s = "abcdefg", k = 2
+输出: "cdefgab"
+示例 2：
+
+输入: s = "lrloseumgh", k = 6
+输出: "umghlrlose"
+ 
+
+限制：
+
+1 <= k < s.length <= 10000
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof
+
+```
+    public String reverseLeftWords(String s, int n) {
+         return s.substring(n)+s.substring(0,n);
+    }
+```
+
+
+# 49.面试题10.01.合并排序的数组
 给定两个排序后的数组 A 和 B，其中 A 的末端有足够的缓冲空间容纳 B。 编写一个方法，将 B 合并入 A 并排序。
 
 初始化 A 和 B 的元素数量分别为 m 和 n。
@@ -2240,3 +2275,4 @@ B = [2,5,6],       n = 3
         }      
     }
 ```
+
