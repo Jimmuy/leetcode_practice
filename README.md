@@ -103,6 +103,8 @@ A project for arithmetic study , daily update
 
 [50.面试题03.数组中重复的数字](#50.面试题03.数组中重复的数字)
 
+[51.559.N叉树的最大深度](#51.559.N叉树的最大深度)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2304,5 +2306,50 @@ B = [2,5,6],       n = 3
             if (!set.add(nums[i])) return nums[i];
         }
         return 0;
+    }
+```
+
+
+# 51.559.N叉树的最大深度
+给定一个 N 叉树，找到其最大深度。
+
+最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。
+
+例如，给定一个 3叉树 :
+
+我们应返回其最大深度，3。
+
+说明:
+
+树的深度不会超过 1000。
+树的节点总不会超过 5000。
+结合求数的最大深度的递归方法，得出，如果不仅仅有左右子孩子，则考虑分别求出每个孩子对应的最大深度就是树的最大深度。
+
+```
+    public int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        }
+       int leftHeight = maxDepth(root.left);
+       int rightHeight = maxDepth(root.right);
+       return Math.max(leftHeight,rightHeight)+1;
+    }
+```
+
+作者：cool_tang123
+链接：https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/solution/di-gui-qiu-jie-by-cool_tang123/
+来源：力扣（LeetCode）
+
+```
+    public int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int maxHeight = 0;
+        for (Node node : root.children) {
+            int depth = maxDepth(node);
+            if (depth > maxHeight) maxHeight = depth;
+        }
+        return maxHeight + 1;
     }
 ```
