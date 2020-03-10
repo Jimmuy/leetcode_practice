@@ -111,6 +111,8 @@ A project for arithmetic study , daily update
 
 [54.121.买卖股票的最佳时机](#54.121.买卖股票的最佳时机)
 
+[55.543.二叉树的直径](#55.543.二叉树的直径)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2500,4 +2502,37 @@ public int[][] findContinuousSequence(int target) {
         }
         return max;
     }
+```
+# 55.543.二叉树的直径
+给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。
+
+示例 :
+给定二叉树
+
+          1
+         / \
+        2   3
+       / \     
+      4   5    
+返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。
+
+注意：两结点之间的路径长度是以它们之间边的数目表示。
+
+```
+class Solution {
+ int result = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        //不能分别计算左右两边的最大深度然后求和+1，因为最长路径不一定是路过根节点的
+        dfs(root);
+        return result;
+    }
+
+    private int dfs(TreeNode node) {
+        if (node == null) return 0;
+        int left = dfs(node.left);
+        int right= dfs(node.right);
+        result = Math.max(result,left+right);
+        return Math.max(left,right)+1;
+    }
+}
 ```
