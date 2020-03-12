@@ -115,6 +115,10 @@ A project for arithmetic study , daily update
 
 [56.1013.将数组分成和相等的三个部分](#56.1013.将数组分成和相等的三个部分)
 
+[57.1071.字符串的最大公因子](#57.1071.字符串的最大公因子)
+
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2585,5 +2589,46 @@ class Solution {
         }
 
         return index >=3;
+    }
+```
+# 57.1071.字符串的最大公因子
+
+对于字符串 S 和 T，只有在 S = T + ... + T（T 与自身连接 1 次或多次）时，我们才认定 “T 能除尽 S”。
+
+返回最长字符串 X，要求满足 X 能除尽 str1 且 X 能除尽 str2。
+
+ 
+
+示例 1：
+
+输入：str1 = "ABCABC", str2 = "ABC"
+输出："ABC"
+示例 2：
+
+输入：str1 = "ABABAB", str2 = "ABAB"
+输出："AB"
+示例 3：
+
+输入：str1 = "LEET", str2 = "CODE"
+输出：""
+ 
+
+提示：
+
+1 <= str1.length <= 1000
+1 <= str2.length <= 1000
+str1[i] 和 str2[i] 为大写英文字母
+```
+//若存在公约数，必然 (str1 + str2).equals(str2 + str1)。然后再通过迭代找最大公约数。
+   public String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2 + str1)) return "";
+        int str1Length = str1.length();
+        int str2Length = str2.length();
+        while (str2Length != 0) {
+            int temp = str2Length;
+            str2Length = str1Length % str2Length;
+            str1Length = temp;
+        }
+        return str1.substring(0, str1Length);
     }
 ```
