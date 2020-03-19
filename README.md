@@ -140,6 +140,7 @@ A project for arithmetic study , daily update
 解题：
 
 ```
+
     public int majorityElement(int[] nums) {
         //投票算法
         int count = 1;
