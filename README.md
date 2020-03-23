@@ -123,8 +123,10 @@ A project for arithmetic study , daily update
 
 [60.1160.拼写单词](#60.1160.拼写单词)
 
+
 [61.876.链表的中间结点](#61.876.链表的中间结点)
 
+[62.409.最长回文串](#61.409.最长回文串)
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -141,6 +143,7 @@ A project for arithmetic study , daily update
 解题：
 
 ```
+
     public int majorityElement(int[] nums) {
         //投票算法
         int count = 1;
@@ -2761,6 +2764,7 @@ str1[i] 和 str2[i] 为大写英文字母
         return res;
     }
 ```
+
 # 61.876.链表的中间结点
 给定一个带有头结点 head 的非空单链表，返回链表的中间结点。
 
@@ -2795,5 +2799,42 @@ ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next 
             fast = fast.next.next;
         }
         return slow;
+
+# 62.409.最长回文串
+给定一个包含大写字母和小写字母的字符串，找到通过这些字母构造成的最长的回文串。
+
+在构造过程中，请注意区分大小写。比如 "Aa" 不能当做一个回文字符串。
+
+注意:
+假设字符串的长度不会超过 1010。
+
+示例 1:
+
+输入:
+"abccccdd"
+
+输出:
+7
+
+解释:
+我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
+```
+    public int longestPalindrome(String s) {
+        int result = 0;
+        boolean isSingle = false;
+        char[] chars = s.toCharArray();
+        int[] arrays = new int[58];
+        for (char c : chars) {
+            arrays[c - 'A']+=1;
+        }
+        for (int i = 0; i < arrays.length; i++) {
+            if (arrays[i] % 2 == 0) {
+                result += arrays[i];
+            } else if ( arrays[i] % 2 == 1) {
+                isSingle = true;
+                result += arrays[i] - 1;
+            }
+        }
+        return isSingle ? result + 1 : result;
     }
 ```
