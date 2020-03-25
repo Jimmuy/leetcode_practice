@@ -129,6 +129,9 @@ A project for arithmetic study , daily update
 
 [63.面试题17.16.按摩师](#63.面试题17.16.按摩师)
 
+[64.892.三维形体的表面积](#64.892.三维形体的表面积)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -2872,5 +2875,60 @@ ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next 
             b = c;
         }
         return b;
+    }
+```
+# 64.892.三维形体的表面积
+在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。
+
+每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。
+
+请你返回最终形体的表面积。
+
+ 
+
+示例 1：
+
+输入：[[2]]
+输出：10
+示例 2：
+
+输入：[[1,2],[3,4]]
+输出：34
+示例 3：
+
+输入：[[1,0],[0,2]]
+输出：16
+示例 4：
+
+输入：[[1,1,1],[1,0,1],[1,1,1]]
+输出：32
+示例 5：
+
+输入：[[2,2,2],[2,1,2],[2,2,2]]
+输出：46
+ 
+
+提示：
+
+1 <= N <= 50
+0 <= grid[i][j] <= 50
+```
+     public int surfaceArea(int[][] grid) {
+               if(grid == null || grid.length < 1 || grid[0].length < 1) return 0;
+        //计算总面积
+        int total = 0;
+        int lost = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                //统计所有的立方体
+                total += grid[i][j];
+                //统计因堆叠损失的面数
+                lost += grid[i][j] > 1 ? grid[i][j] - 1 : 0;
+                //统计行因堆叠损失的面数
+                if (i > 0) lost += Math.min(grid[i - 1][j], grid[i][j]);
+                if (j > 0) lost += Math.min(grid[i][j - 1], grid[i][j]);
+            }
+        }
+        return total * 6 - lost * 2;
     }
 ```
