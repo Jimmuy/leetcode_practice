@@ -133,6 +133,9 @@ A project for arithmetic study , daily update
 
 [65.999.车的可用捕获量](#65.999.车的可用捕获量)
 
+[66.24.两两交换链表中的节点](#66.24.两两交换链表中的节点)
+
+
 
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
@@ -3005,5 +3008,31 @@ board[i][j] 可以是 'R'，'.'，'B' 或 'p'
             }
         }
         return 0;
+    }
+```
+
+# 66.24.两两交换链表中的节点
+
+给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+
+你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+
+ 
+
+示例:
+
+给定 1->2->3->4, 你应该返回 2->1->4->3.
+
+```
+    public ListNode swapPairs(ListNode head) {
+        if (head == null) return null;
+        ListNode index = head;
+        if (index.next != null) {
+            int temp = index.val;
+            index.val = index.next.val;
+            index.next.val = temp;
+            swapPairs(index.next.next);
+        }
+        return head;
     }
 ```
