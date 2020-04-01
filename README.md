@@ -137,6 +137,8 @@ A project for arithmetic study , daily update
 
 [67.面试题62.圆圈中最后剩下的数字](#67.面试题62.圆圈中最后剩下的数字)
 
+[68.118.杨辉三角](#68.118.杨辉三角)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -3067,5 +3069,40 @@ board[i][j] 可以是 'R'，'.'，'B' 或 'p'
             index = (index + m) % i;
         }
         return index;
+    }
+```
+# 68.118.杨辉三角
+给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+
+
+
+在杨辉三角中，每个数是它左上方和右上方的数的和。
+
+示例:
+
+输入: 5
+输出:
+[
+     [1],
+    [1,1],
+   [1,2,1],
+  [1,3,3,1],
+ [1,4,6,4,1]
+]
+```
+    fun generate(numRows: Int): List<List<Int>> {
+        val result = ArrayList<List<Int>>()
+        for (i in 0..numRows-1) {
+        val row = ArrayList<Int>()
+        for (j in 0..i) {
+            if (j == 0 || j == i) {
+                row.add(1)
+            } else {
+                row.add(result[i - 1][j - 1] + result[i - 1][j]);
+            }
+        }
+        result.add(row)
+    }
+    return result
     }
 ```
