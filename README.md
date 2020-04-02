@@ -139,6 +139,8 @@ A project for arithmetic study , daily update
 
 [68.118.杨辉三角](#68.118.杨辉三角)
 
+[69.119.杨辉三角II](#69.119.杨辉三角II)
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -3105,4 +3107,35 @@ board[i][j] 可以是 'R'，'.'，'B' 或 'p'
     }
     return result
     }
+```
+# 69.119.杨辉三角II
+给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。
+
+
+
+在杨辉三角中，每个数是它左上方和右上方的数的和。
+
+示例:
+
+输入: 3
+输出: [1,3,3,1]
+进阶：
+
+你可以优化你的算法到 O(k) 空间复杂度吗？
+```
+ fun getRow(rowIndex: Int): List<Int> {
+    val result = ArrayList<List<Int>>()
+    for (i in 0..rowIndex) {
+        val sub = ArrayList<Int>()
+        for (j in 0 .. i) {
+            if (j == 0 || j == i) {
+                sub.add(1)
+            } else {
+                sub.add(result[i - 1][j - 1] + result[i - 1][j])
+            }
+        }
+        result.add(sub)
+    }
+    return result[rowIndex]
+}
 ```
