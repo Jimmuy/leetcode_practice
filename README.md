@@ -1432,6 +1432,16 @@ S 只包含字符 "I" 或 "D"。
         //返回翻转后的链表的头结点
         return pre;
 ```
+```
+public ListNode reverseList(ListNode head) {
+        //再次做到了反转链表的题目，递归的算法，相当于，假设我的子节点都已经完成了反转，就只剩下我自己和子节点进行反转了所以node.next.next = node;然后再断开node.next = null;
+        if(head == null || head.next == null )return head;
+        ListNode temp =reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return temp;
+    }
+```
 # 29.146.LRU缓存机制
 
 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
