@@ -1879,6 +1879,17 @@ public class Solution {
         }
         return dp[n];
     }
+    //记忆化递归，使用map存储计算过的值，这样就可以减少同样的值得计算。
+    public int climbStairs(int n) {
+        return helper(n,new HashMap<Integer, Integer>());
+    }
+    public int helper(int n, HashMap<Integer, Integer> cache) {
+        if (n < 3) return n;
+        if (cache.containsKey(n)) return cache.get(n);
+        int value = helper(n - 1, cache) + helper(n - 2, cache);
+        cache.put(n, value);
+        return value;
+    }
 ```
 # 38.面试题01.01.判定字符是否唯一
 实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
