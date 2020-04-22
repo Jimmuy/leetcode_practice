@@ -145,6 +145,9 @@ A project for arithmetic study , daily update
 
 [71.66.斐波那契数列](#71.66.斐波那契数列)
 
+[72.二叉树的最大深度](#72.二叉树的最大深度)
+
+
 # 1.给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -3279,4 +3282,31 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
         if(N<2) return N;
         return fib(N-1)+fib(N-2);
     }
+```
+
+# 72.二叉树的最大深度
+给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例：
+给定二叉树 [3,9,20,null,null,15,7]，
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最大深度 3 。
+
+```
+  public int maxDepth(TreeNode root) {
+     if (root == null) return 0;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        return Math.max(left, right) + 1;
+    }
+
 ```
